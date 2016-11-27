@@ -77,9 +77,33 @@ class Perceptron(object):
 
         return ((self.net_input(X_ins) > 0) ? 1 : -1);
 
+    def evaluate(self, X, y):
+        
+
+
+
 def main():
     # load iris data
-    iris_df = pd.load_csv('../datasets/iris.csv', Header=None)
+    iris_df = pd.load_csv('../datasets/iris.csv', Header=None).drop(0, 1)
+    iris_train_X = iris_df.iloc[0:100, [0, 2]].values
+    iris_train_target = iris_df.iloc[0:100, 4].values
+    iris_train_y = np.where(iris_train_target == 'setosa', -1, 1)
+
+    iris_test_X = iris_df.iloc[50:, [0, 2]].values
+    iris_test_target = iris_df.iloc[50:, 4].values
+    iris_test_y = np.where(iris_test_target == 'setosa', -1, 1)
+    
+    pnn = Perceptron(0.01, 10)
+    print("Training perceptron with examples... ")
+    print("Examples shape " + iris_train_X.shape + " " + iris_train_y.shape + "\n")
+    pnn.fit(iris_train_X, iris_train_y)
+
+    
+
+
+    
+    
+    
     
             
 
